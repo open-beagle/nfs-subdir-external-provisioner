@@ -16,5 +16,6 @@ go build -ldflags "-s -w" -o release/linux/${GOARCH}/nfs-provisioner ./cmd/nfs-s
 export GOARCH=mips64le
 go build -ldflags "-s -w" -o release/linux/${GOARCH}/nfs-provisioner ./cmd/nfs-subdir-external-provisioner
 
-export GOARCH=loong64
-go build -ldflags "-s -w" -o release/linux/${GOARCH}/nfs-provisioner ./cmd/nfs-subdir-external-provisioner
+# error
+# export GOARCH=loong64
+# go build -ldflags "-s -w" -o release/linux/${GOARCH}/nfs-provisioner ./cmd/nfs-subdir-external-provisioner

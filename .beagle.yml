@@ -112,28 +112,29 @@ steps:
       registry_password:
         from_secret: REGISTRY_PASSWORD_ALIYUN
 
-  - name: docker-loong64
-    image: registry.cn-qingdao.aliyuncs.com/wod/devops-docker:1.0
-    volumes:
-      - name: docker
-        path: /var/run/docker.sock
-    settings:
-      base: registry.cn-qingdao.aliyuncs.com/wod/alpine:3-loong64
-      dockerfile: .beagle/dockerfile
-      repo: wod/nfs-provisioner
-      version: v4.0.17
-      channel: loong64
-      args: 'TARGETOS=linux,TARGETARCH=loong64'
-      registry: registry.cn-qingdao.aliyuncs.com
-      registry_user:
-        from_secret: REGISTRY_USER_ALIYUN
-      registry_password:
-        from_secret: REGISTRY_PASSWORD_ALIYUN
+  # - name: docker-loong64
+  #   image: registry.cn-qingdao.aliyuncs.com/wod/devops-docker:1.0
+  #   volumes:
+  #     - name: docker
+  #       path: /var/run/docker.sock
+  #   settings:
+  #     base: registry.cn-qingdao.aliyuncs.com/wod/alpine:3-loong64
+  #     dockerfile: .beagle/dockerfile
+  #     repo: wod/nfs-provisioner
+  #     version: v4.0.17
+  #     channel: loong64
+  #     args: 'TARGETOS=linux,TARGETARCH=loong64'
+  #     registry: registry.cn-qingdao.aliyuncs.com
+  #     registry_user:
+  #       from_secret: REGISTRY_USER_ALIYUN
+  #     registry_password:
+  #       from_secret: REGISTRY_PASSWORD_ALIYUN
 
   - name: docker-arch
     image: registry.cn-qingdao.aliyuncs.com/wod/devops-docker-manifest:1.0
     settings:
-      platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/mips64le,linux/loong64
+      # platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/mips64le,linux/loong64
+      platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/mips64le
       template: registry.cn-qingdao.aliyuncs.com/wod/nfs-provisioner:v4.0.17-ARCH
       target: registry.cn-qingdao.aliyuncs.com/wod/nfs-provisioner:v4.0.17
       username:
