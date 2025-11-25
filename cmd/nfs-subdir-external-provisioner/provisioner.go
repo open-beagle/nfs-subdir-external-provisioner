@@ -43,6 +43,13 @@ const (
 	provisionerNameKey = "PROVISIONER_NAME"
 )
 
+var (
+	// Version information set by ldflags at build time
+	version   = "dev"
+	gitCommit = "unknown"
+	buildDate = "unknown"
+)
+
 type nfsProvisioner struct {
 	client kubernetes.Interface
 	server string
@@ -208,6 +215,11 @@ func (p *nfsProvisioner) getClassForVolume(ctx context.Context, pv *v1.Persisten
 func main() {
 	flag.Parse()
 	flag.Set("logtostderr", "true")
+
+	// Print version information
+	glog.Infof("NFS Subdir External Provisioner Version: %s", version)
+	glog.Infof("Git Commit: %s", gitCommit)
+	glog.Infof("Build Date: %s", buildDate)
 
 	server := os.Getenv("NFS_SERVER")
 	if server == "" {
