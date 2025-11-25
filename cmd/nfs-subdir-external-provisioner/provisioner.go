@@ -101,7 +101,6 @@ func (p *nfsProvisioner) Provision(ctx context.Context, options controller.Provi
 		data: map[string]string{
 			"name":      pvcName,
 			"namespace": pvcNamespace,
-			"PV.name":   options.PVName,
 		},
 		labels:      options.PVC.Labels,
 		annotations: options.PVC.Annotations,
@@ -112,6 +111,8 @@ func (p *nfsProvisioner) Provision(ctx context.Context, options controller.Provi
 
 	pathPattern, exists := options.StorageClass.Parameters["pathPattern"]
 	if exists {
+		// Replace ${.PVC.volumeName} with actual PV name
+		pathPattern = strings.ReplaceAll(pathPattern, "${.PVC.volumeName}", options.PVName)
 		customPath := metadata.stringParser(pathPattern)
 		if customPath != "" {
 			path = filepath.Join(p.path, customPath)
