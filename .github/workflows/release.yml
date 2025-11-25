@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      BUILD_VERSION: v4.0.2
+      BUILD_VERSION: v4.0.3
 
     steps:
       - name: Checkout code
